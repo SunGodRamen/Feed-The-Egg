@@ -1,11 +1,16 @@
 import React, { useState, useRef } from 'react';
 import './EggManGame.css';
+import CustomPopup from '../Popup/Popup';
 
 const EggManGame = () => {
     // State variables to keep track of the score, number of eggs and egg pack
     const [score, setScore] = useState(0);
     const [eggs, setEggs] = useState(20);
     const [eggPack, setEggPack] = useState(null);
+
+    const [showScorePopup, setShowScorePopup] = useState(false);
+    const [showEggPackPopup, setShowEggPackPopup] = useState(false);
+    const [eggPackResponse, setEggPackResponse] = useState('');
 
     // References to DOM elements
     const eggRef = useRef(null);
@@ -75,9 +80,11 @@ const EggManGame = () => {
         const eggMan = document.getElementById('egg-man');
         // Check if the egg collides with the eggman and increment the score if it does
         if (egg && isColliding(egg.getBoundingClientRect(), eggMan.getBoundingClientRect())) {
-            setScore(score + 1);
-            if (score + 1 === 10) {
-                alert("10 eggs");
+            const newScore = score + 1;
+            setScore(newScore);
+            // Check if the score reached 10 to show the score popup
+            if (newScore === 10) {
+                setShowScorePopup(true);
             }
         }
 
@@ -86,15 +93,19 @@ const EggManGame = () => {
             eggRef.current.removeChild(egg);
         }
 
-        // Check if out of eggs and ask if the user wants to buy more
+        // Check if out of eggs and show popup to ask if the user wants to buy more
         if (eggs - 1 === 0) {
-            const userResponse = prompt("You have run out of eggs, would you like to buy an 80 pack of eggs?", "");
-            if (userResponse && userResponse.toLowerCase() === "yes") {
-                setEggs(80);
-                setEggPack(80);
-            }
+            setShowEggPackPopup(true);
         }
     };
+
+    const handleEggPackSubmit = () => {
+        if (eggPackResponse.toLowerCase() === 'yes') {
+            setEggs(80);
+        }
+        setShowEggPackPopup(false);
+        setEggPackResponse('');
+    };    
 
     // Function to check if two elements are colliding
     const isColliding = (rect1, rect2) => {
@@ -112,8 +123,22 @@ const EggManGame = () => {
             <div ref={eggRef} className="egg-container"></div>
             <div className="score">Score: {score}</div>
             {eggPack !== null && <div className="egg-pack">Eggs: {eggs}</div>}
+            
+            {/* Custom Popup for "10 eggs" message */}
+            <CustomPopup isOpen={showScorePopup} message="10 eggs" onClose={() => setShowScorePopup(false)} />
+            
+            {/* Custom Popup for "run out of eggs" message */}
+            <CustomPopup isOpen={showEggPackPopup} message="You have run out of eggs, would you like to buy an 80 pack of eggs?">
+                <input
+                    type="text"
+                    value={eggPackResponse}
+                    onChange={(e) => setEggPackResponse(e.target.value)}
+                />
+                <button onClick={handleEggPackSubmit}>Submit</button>
+            </CustomPopup>
         </div>
     );
+    
 };
 
 export default EggManGame;

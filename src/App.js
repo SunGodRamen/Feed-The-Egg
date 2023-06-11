@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
-import EggManGame from './components/EggManGame';
+import EggManGame from './components/Egg/EggManGame';
+import Popup from './components/Popup/Popup';
 
 function App() {
   return (
