@@ -1,25 +1,29 @@
 .game {
     position: relative;
-    width: 600px;
-    height: 400px;
+    width: 95%;
+    height: 95vh;
     border: 1px solid black;
     margin: 0 auto;
+    overflow: hidden;
+    background-color: #444444;
 }
 
 .egg-man {
     position: absolute;
-    left: 50px;
-    top: 150px;
-    width: 80px;
-    height: 80px;
-    background-color: lightblue;
-    border-radius: 50%;
+    bottom: 50px; /* Position egg-man 50px from the bottom */
+    left: 100px; /* Position egg-man 100px from the left */
+    height: 200px;
+    width: 180px; /* It's good practice to define both height and width */
+    background-image: url('/public/images/EggMan-Base.png');
+    background-size: 100% 100%; /* Resize background image to fill the element */
+    background-repeat: no-repeat; /* Do not repeat the background image */
+    z-index: 10; /* Optional: Ensure that it appears above other elements */
 }
 
 .basket {
     position: absolute;
-    right: 50px;
-    top: 150px;
+    bottom: 50px; /* Position basket 10px from the bottom */
+    right: 100px; /* Position basket 10px from the right */
     width: 50px;
     height: 50px;
     background-color: brown;
@@ -38,7 +42,7 @@
 .score {
     font-family: 'VCR_OSD_MONO', sans-serif;
     position: absolute;
-    bottom: 10px;
+    bottom: 25px;
     width: 100%;
     text-align: center;
     font-size: 18px;
