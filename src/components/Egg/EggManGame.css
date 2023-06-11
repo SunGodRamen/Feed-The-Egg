@@ -14,7 +14,7 @@
     left: 100px; /* Position egg-man 100px from the left */
     height: 200px;
     width: 180px; /* It's good practice to define both height and width */
-    background-image: url('/public/images/EggMan-Base.png');
+    background-image: url('/public/images/EggMan-OpenMouth.png');
     background-size: 100% 100%; /* Resize background image to fill the element */
     background-repeat: no-repeat; /* Do not repeat the background image */
     z-index: 10; /* Optional: Ensure that it appears above other elements */
@@ -22,21 +22,27 @@
 
 .basket {
     position: absolute;
-    bottom: 50px; /* Position basket 10px from the bottom */
-    right: 100px; /* Position basket 10px from the right */
-    width: 50px;
-    height: 50px;
-    background-color: brown;
+    bottom: 6px; /* Position basket 10px from the bottom */
+    right: 50px; /* Position basket 10px from the right */
+    width: 200px;
+    height: 200px;
+    background-image: url('/public/images/Basket.png');
+    background-size: 100% 100%; /* Resize background image to fill the element */
+    background-repeat: no-repeat; /* Do not repeat the background image */
     border-radius: 50%;
+    z-index: 10; /* Optional: Ensure that it appears above other elements */
     cursor: pointer;
 }
 
 .egg {
     position: absolute;
-    width: 20px;
-    height: 20px;
-    background-color: blue;
+    width: 200px;
+    height: 200px;
+    background-image: url('/public/images/Egg-Egg.png');
+    background-size: 100% 100%; /* Resize background image to fill the element */
+    background-repeat: no-repeat; /* Do not repeat the background image */
     border-radius: 50%;
+    z-index: 10; /* Optional: Ensure that it appears above other elements */
 }
 
 .score {
@@ -54,3 +60,16 @@
     right: 50px;
     font-size: 16px;
 }
+
+.feed-text {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    font-family: 'VCR_OSD_MONO', sans-serif;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    z-index: 5; /* Optional: Set a lower z-index to ensure it stays behind the eggs and eggman */
+}
+
